@@ -1,4 +1,5 @@
 package com.mantenimiento.solicitud.service;
+
 import com.mantenimiento.solicitud.model.Solicitud;
 import com.mantenimiento.solicitud.repository.SolicitudRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +27,21 @@ public class SolicitudService {
 
     public void eliminar(Long id) {
         repository.deleteById(id);
+    }
+
+    public Solicitud actualizar(Long id, Solicitud solicitudActualizada) {
+        return repository.findById(id)
+                .map(solicitudExistente -> {
+                    solicitudExistente.setTipo(solicitudActualizada.getTipo());
+                    solicitudExistente.setDescripcion(solicitudActualizada.getDescripcion());
+                    solicitudExistente.setFechaSolicitud(solicitudActualizada.getFechaSolicitud());
+                    solicitudExistente.setEstado(solicitudActualizada.getEstado());
+                    solicitudExistente.setSolicitante(solicitudActualizada.getSolicitante());
+                    return repository.save(solicitudExistente);
+                })
+                .orElseGet(() -> {
+                    solicitudActualizada.setId(id);
+                    return repository.save(solicitudActualizada);
+                });
     }
 }

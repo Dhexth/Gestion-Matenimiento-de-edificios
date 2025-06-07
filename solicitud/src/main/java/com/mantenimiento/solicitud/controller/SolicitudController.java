@@ -30,6 +30,13 @@ public class SolicitudController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.guardar(solicitud));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> actualizar(
+            @PathVariable Long id,
+            @RequestBody Solicitud solicitud) {
+        return ResponseEntity.ok(service.actualizar(id, solicitud));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         service.eliminar(id);
