@@ -15,16 +15,20 @@ public class SolicitudController {
 
     private final SolicitudService service;
 
-    @GetMapping
-    public ResponseEntity<List<Solicitud>> getAll() {
-        return ResponseEntity.ok(service.listarTodas());
-    }
+    @GetMapping("/estado/{estado}")
+public ResponseEntity<List<Solicitud>> getByEstado(@PathVariable String estado) {
+    return ResponseEntity.ok(service.buscarPorEstado(estado));
+}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Solicitud> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.obtenerPorId(id));
-    }
+@GetMapping("/solicitante/{nombre}")
+public ResponseEntity<List<Solicitud>> getBySolicitante(@PathVariable String nombre) {
+    return ResponseEntity.ok(service.buscarPorSolicitante(nombre));
+}
 
+@GetMapping("/tipo/{tipo}")
+public ResponseEntity<List<Solicitud>> getByTipo(@PathVariable String tipo) {
+    return ResponseEntity.ok(service.buscarPorTipo(tipo));
+}
     @PostMapping
     public ResponseEntity<Solicitud> crear(@RequestBody Solicitud solicitud) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.guardar(solicitud));

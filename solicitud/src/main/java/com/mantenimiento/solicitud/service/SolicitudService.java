@@ -29,6 +29,18 @@ public class SolicitudService {
         repository.deleteById(id);
     }
 
+    public List<Solicitud> buscarPorEstado(String estado) {
+    return repository.findByEstado(estado);
+}
+
+public List<Solicitud> buscarPorSolicitante(String solicitante) {
+    return repository.findBySolicitanteContainingIgnoreCase(solicitante);
+}
+
+public List<Solicitud> buscarPorTipo(String tipo) {
+    return repository.findByTipo(tipo);
+}
+
     public Solicitud actualizar(Long id, Solicitud solicitudActualizada) {
         return repository.findById(id)
                 .map(solicitudExistente -> {

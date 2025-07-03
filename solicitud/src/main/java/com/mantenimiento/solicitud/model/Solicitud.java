@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "solicitudes")
 public class Solicitud {
     
@@ -15,30 +16,80 @@ public class Solicitud {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 50)
     private String tipo;
+
+    @Column(nullable = false, length = 255)
     private String descripcion;
+
+    @Column(name = "fecha_solicitud", nullable = false)
     private LocalDate fechaSolicitud;
+
+    @Column(nullable = false, length = 20)
     private String estado;
+
+    @Column(nullable = false, length = 100)
     private String solicitante;
 
-    // Setters explícitos para mejor control
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    // Métodos de negocio (CRUD)
+
+    /**
+     * Crea una nueva solicitud con los datos proporcionados
+     */
+    public static Solicitud crearSolicitud(String tipo, String descripcion, String solicitante) {
+        return Solicitud.builder()
+                .tipo(tipo)
+                .descripcion(descripcion)
+                .fechaSolicitud(LocalDate.now())
+                .estado("Pendiente")
+                .solicitante(solicitante)
+                .build();
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    /**
+     * Actualiza los campos editables de la solicitud
+     */
+    public void actualizarDatos(String tipo, String descripcion, String estado) {
+        if (tipo != null && !tipo.isBlank()) {
+            this.tipo = tipo;
+        }
+        if (descripcion != null && !descripcion.isBlank()) {
+            this.descripcion = descripcion;
+        }
+        if (estado != null && !estado.isBlank()) {
+            this.estado = estado;
+        }
     }
 
-    public void setFechaSolicitud(LocalDate fechaSolicitud) {
-        this.fechaSolicitud = fechaSolicitud;
+    /**
+     * Marca la solicitud como completada
+     */
+    public void marcarComoCompletada() {
+        this.estado = "Completada";
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    /**
+     * Verifica si la solicitud está pendiente
+     */
+    public boolean estaPendiente() {
+        return "Pendiente".equalsIgnoreCase(this.estado);
     }
 
-    public void setSolicitante(String solicitante) {
-        this.solicitante = solicitante;
+    /**
+     * Verifica si la solicitud pertenece a un solicitante
+     */
+    public boolean perteneceA(String solicitante) {
+        return this.solicitante.equalsIgnoreCase(solicitante);
+    }
+
+    /**
+     * Método toString personalizado
+     */
+    @Override
+    public String toString() {
+        return String.format(
+            "Solicitud [ID: %d, Tipo: %s, Solicitante: %s, Estado: %s, Fecha: %s]",
+            id, tipo, solicitante, estado, fechaSolicitud
+        );
     }
 }
