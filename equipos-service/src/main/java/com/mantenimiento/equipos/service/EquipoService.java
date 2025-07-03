@@ -1,6 +1,6 @@
 package com.mantenimiento.equipos.service;
 
-import com.mantenimiento.equipos.modulo.Equipo;
+import com.mantenimiento.equipos.model.Equipo;
 import com.mantenimiento.equipos.repository.EquipoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,11 @@ public class EquipoService {
         existente.setNombre(equipo.getNombre());
         existente.setUbicacion(equipo.getUbicacion());
         existente.setEstado(equipo.getEstado());
-        // Actualizar otros campos según necesidad
+        existente.setModelo(equipo.getModelo());
+        existente.setNumeroSerie(equipo.getNumeroSerie());
+        existente.setFechaInstalacion(equipo.getFechaInstalacion());
+        existente.setUltimoMantenimiento(equipo.getUltimoMantenimiento());
+        
         return equipoRepository.save(existente);
     }
 

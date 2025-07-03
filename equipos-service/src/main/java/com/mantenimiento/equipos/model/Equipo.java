@@ -1,7 +1,6 @@
-package com.mantenimiento.equipos.modulo;
+package com.mantenimiento.equipos.model;
 
 import java.time.LocalDate;
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,26 +13,27 @@ import lombok.*;
 public class Equipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private Long id;
-
+    
     @Column(nullable = false)
     private String nombre;
-
+    
     @Column(nullable = false)
     private String ubicacion;
 
     @Column(nullable = false)
     private String estado;
-
-    @Column
+    
+    @Column(nullable = false)
     private String modelo;
 
-    @Column
+    @Column(nullable = false)
     private String numeroSerie;
 
-    @Column
+    @Column(nullable = false)
     private LocalDate fechaInstalacion;
 
-    @Column
+    @Column(nullable = false)
     private LocalDate ultimoMantenimiento;
 }

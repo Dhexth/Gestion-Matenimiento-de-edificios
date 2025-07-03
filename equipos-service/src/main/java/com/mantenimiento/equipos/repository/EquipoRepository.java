@@ -1,7 +1,9 @@
 package com.mantenimiento.equipos.repository;
 
-import com.mantenimiento.equipos.modulo.Equipo;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.mantenimiento.equipos.model.Equipo;
+
 import java.util.List;
 
 public interface EquipoRepository extends JpaRepository<Equipo, Long> {

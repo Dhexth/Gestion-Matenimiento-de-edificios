@@ -1,0 +1,77 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "HistorialApplication",
+            "request": "launch",
+            "mainClass": "com.mantenimiento.historial.HistorialApplication",
+            "projectName": "historial"
+        },
+        {
+            "type": "java",
+            "name": "DocumentosApplication",
+            "request": "launch",
+            "mainClass": "com.mantenimiento.documentos.DocumentosApplication",
+            "projectName": "documentos"
+        },
+        {
+            "type": "java",
+            "name": "CalendarioApplication",
+            "request": "launch",
+            "mainClass": "com.mantenimiento.calendario.CalendarioApplication",
+            "projectName": "calendario"
+        },
+        {
+            "type": "java",
+            "name": "SolicitudApplication",
+            "request": "launch",
+            "mainClass": "com.mantenimiento.solicitud.SolicitudApplication",
+            "projectName": "solicitud"
+        },
+        {
+            "type": "java",
+            "name": "InventarioApplication",
+            "request": "launch",
+            "mainClass": "com.mantenimiento.inventario.InventarioApplication",
+            "projectName": "inventario"
+        },
+        {
+            "type": "java",
+            "name": "PersonalApplication",
+            "request": "launch",
+            "mainClass": "com.mantenimiento.personal.PersonalApplication",
+            "projectName": "personal"
+        },
+        {
+            "type": "java",
+            "name": "ProveedoresApplication",
+            "request": "launch",
+            "mainClass": "com.mantenimiento.proveedores.ProveedoresApplication",
+            "projectName": "proveedores"
+        },
+        {
+            "type": "java",
+            "name": "FallasApplication",
+            "request": "launch",
+            "mainClass": "com.mantenimiento.fallas.FallasApplication",
+            "projectName": "fallas"
+        },
+        {
+            "type": "java",
+            "name": "MantenimientosServiceApplication",
+            "request": "launch",
+            "mainClass": "com.mantenimiento.mantenimientos.MantenimientosServiceApplication",
+            "projectName": "mantenimientos-service"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EquiposServiceApplication<equipos-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.mantenimiento.equipos.EquiposServiceApplication",
+            "projectName": "equipos-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
