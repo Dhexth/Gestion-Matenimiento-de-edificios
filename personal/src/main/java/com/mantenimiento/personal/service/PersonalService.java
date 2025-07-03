@@ -12,7 +12,7 @@ import java.util.List;
 
 public class PersonalService {
     
-     private final PersonalRepository personalRepository;
+    private final PersonalRepository personalRepository;
 
     public List<Personal> obtenerTodos() {
         return personalRepository.findAll();

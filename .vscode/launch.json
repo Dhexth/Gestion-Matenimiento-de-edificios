@@ -2,6 +2,7 @@
     "configurations": [
         {
             "type": "java",
+<<<<<<< HEAD
             "name": "HistorialApplication",
             "request": "launch",
             "mainClass": "com.mantenimiento.historial.HistorialApplication",
@@ -70,6 +71,13 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.mantenimiento.equipos.EquiposServiceApplication",
             "projectName": "equipos-service",
+=======
+            "name": "Spring Boot-SolicitudApplication<solicitud>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.mantenimiento.solicitud.SolicitudApplication",
+            "projectName": "solicitud",
+>>>>>>> f25b5a0d4a299523bb49777bdd78e1270397cded
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
