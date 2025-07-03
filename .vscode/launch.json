@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SolicitudApplication<solicitud>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.mantenimiento.solicitud.SolicitudApplication",
+            "projectName": "solicitud",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
