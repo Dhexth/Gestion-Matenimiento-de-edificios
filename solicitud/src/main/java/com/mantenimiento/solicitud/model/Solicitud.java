@@ -1,6 +1,7 @@
 package com.mantenimiento.solicitud.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import java.time.LocalDate;
 
@@ -16,80 +17,29 @@ public class Solicitud {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "El tipo es obligatorio")
+    @Size(min = 3, max = 50, message = "El tipo debe tener entre 3 y 50 caracteres")
     @Column(nullable = false, length = 50)
     private String tipo;
 
+    @NotBlank(message = "La descripción es obligatoria")
+    @Size(min = 10, max = 255, message = "La descripción debe tener entre 10 y 255 caracteres")
     @Column(nullable = false, length = 255)
     private String descripcion;
 
     @Column(name = "fecha_solicitud", nullable = false)
     private LocalDate fechaSolicitud;
 
+    @NotBlank(message = "El estado es obligatorio")
+    @Pattern(regexp = "Pendiente|En Proceso|Completada",
+            message = "El estado debe ser 'Pendiente', 'En Proceso' o 'Completada'")
     @Column(nullable = false, length = 20)
     private String estado;
 
+    @NotBlank(message = "El solicitante es obligatorio")
+    @Size(min = 3, max = 100, message = "El solicitante debe tener entre 3 y 100 caracteres")
     @Column(nullable = false, length = 100)
     private String solicitante;
 
-    // Métodos de negocio (CRUD)
-
-    /**
-     * Crea una nueva solicitud con los datos proporcionados
-     */
-    public static Solicitud crearSolicitud(String tipo, String descripcion, String solicitante) {
-        return Solicitud.builder()
-                .tipo(tipo)
-                .descripcion(descripcion)
-                .fechaSolicitud(LocalDate.now())
-                .estado("Pendiente")
-                .solicitante(solicitante)
-                .build();
-    }
-
-    /**
-     * Actualiza los campos editables de la solicitud
-     */
-    public void actualizarDatos(String tipo, String descripcion, String estado) {
-        if (tipo != null && !tipo.isBlank()) {
-            this.tipo = tipo;
-        }
-        if (descripcion != null && !descripcion.isBlank()) {
-            this.descripcion = descripcion;
-        }
-        if (estado != null && !estado.isBlank()) {
-            this.estado = estado;
-        }
-    }
-
-    /**
-     * Marca la solicitud como completada
-     */
-    public void marcarComoCompletada() {
-        this.estado = "Completada";
-    }
-
-    /**
-     * Verifica si la solicitud está pendiente
-     */
-    public boolean estaPendiente() {
-        return "Pendiente".equalsIgnoreCase(this.estado);
-    }
-
-    /**
-     * Verifica si la solicitud pertenece a un solicitante
-     */
-    public boolean perteneceA(String solicitante) {
-        return this.solicitante.equalsIgnoreCase(solicitante);
-    }
-
-    /**
-     * Método toString personalizado
-     */
-    @Override
-    public String toString() {
-        return String.format(
-            "Solicitud [ID: %d, Tipo: %s, Solicitante: %s, Estado: %s, Fecha: %s]",
-            id, tipo, solicitante, estado, fechaSolicitud
-        );
-    }
+    
 }

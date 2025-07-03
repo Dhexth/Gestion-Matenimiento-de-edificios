@@ -31,13 +31,14 @@ class SolicitudServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         
-        solicitud = new Solicitud();
-        solicitud.setId(1L);
-        solicitud.setTipo("Mantenimiento");
-        solicitud.setDescripcion("Descripción de prueba");
-        solicitud.setFechaSolicitud(LocalDate.now());
-        solicitud.setEstado("Pendiente");
-        solicitud.setSolicitante("Juan Perez");
+        solicitud = Solicitud.builder()
+            .id(1L)
+            .tipo("Mantenimiento")
+            .descripcion("Descripción de prueba")
+            .fechaSolicitud(LocalDate.now())
+            .estado("Pendiente")
+            .solicitante("Juan Perez")
+            .build();
     }
 
     @Test
@@ -50,5 +51,52 @@ class SolicitudServiceTest {
         verify(repository, times(1)).findAll();
     }
 
-    // Resto de los tests...
+    @Test
+    void testObtenerPorIdExistente() {
+        when(repository.findById(1L)).thenReturn(Optional.of(solicitud));
+        
+        Solicitud result = service.obtenerPorId(1L);
+        assertNotNull(result);
+        assertEquals("Mantenimiento", result.getTipo());
+    }
+
+    @Test
+    void testObtenerPorIdNoExistente() {
+        when(repository.findById(99L)).thenReturn(Optional.empty());
+        
+        Solicitud result = service.obtenerPorId(99L);
+        assertNull(result);
+    }
+
+    @Test
+    void testGuardar() {
+        when(repository.save(any(Solicitud.class))).thenReturn(solicitud);
+        
+        Solicitud nueva = Solicitud.builder()
+            .tipo("Reparación")
+            .descripcion("Nueva descripción")
+            .build();
+        
+        Solicitud result = service.guardar(nueva);
+        assertNotNull(result);
+        assertEquals(1L, result.getId());
+    }
+
+    @Test
+    void testBuscarPorEstado() {
+        when(repository.findByEstado("Pendiente")).thenReturn(Arrays.asList(solicitud));
+        
+        List<Solicitud> result = service.buscarPorEstado("Pendiente");
+        assertFalse(result.isEmpty());
+        assertEquals(1, result.size());
+        assertEquals("Pendiente", result.get(0).getEstado());
+    }
+
+    @Test
+    void testEliminar() {
+        doNothing().when(repository).deleteById(1L);
+        
+        service.eliminar(1L);
+        verify(repository, times(1)).deleteById(1L);
+    }
 }
